@@ -22,7 +22,6 @@ const FeedPage = () => {
     return <Preloader />;
   }
 
-  console.log(id);
 
   return (
     <div className="container">

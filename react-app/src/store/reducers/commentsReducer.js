@@ -20,8 +20,13 @@ export default function commentReducer(
     case GET_COMMENTS:
       return {
         ...state,
-        comments: [...state.comments, ...payload],
+        comments: payload,
         loading: false
+      };
+    case ADD_COMMENT:
+      return {
+        ...state,
+        comments: [...state.comments, ...payload],
       };
     case DELETE_COMMENT:
       return {

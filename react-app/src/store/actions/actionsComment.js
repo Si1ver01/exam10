@@ -23,7 +23,7 @@ export const requestGetComment = id => async dispatch => {
   try {
     dispatch(commentsLoading());
     const response = await axios.get(`/comments/?news_id=${id}`);
-    const data = response.data;
+    const { data } = response.data;
     dispatch(getComments(data));
   } catch (e) {
     dispatch(errorComments(e.message));
@@ -32,15 +32,19 @@ export const requestGetComment = id => async dispatch => {
 
 export const requestAddComment = comment => async dispatch => {
   try {
-    dispatch(commentsLoading());
-    const response = await fetch("/comments", {
-      method: "POST",
-      body: JSON.stringify(comment),
-      headers: { "Content-Type": "application/json" }
-    });
-    const data = await response.json();
+    // dispatch(commentsLoading());
+    // const response = await fetch("/comments", {
+    //   method: "POST",
+    //   body: JSON.stringify(comment),
+    //   headers: { "Content-Type": "application/json" }
+    // });
+    // const data = await response.json();
 
-    dispatch(getComments(data));
+    const response = await axios.post('/comments' , comment);
+    const data = response.data;
+    console.log(data);
+
+    dispatch(addComment(data));
   } catch (e) {
     dispatch(errorComments(e.message));
   }
