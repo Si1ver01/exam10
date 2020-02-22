@@ -1,16 +1,40 @@
+import {
+  ADD_COMMENT,
+  COMMENTS_LOADING,
+  DELETE_COMMENT,
+  ERROR_COMMENTS,
+  GET_COMMENTS
+} from "../actions/actionsComment";
+
 const initialState = {
- comments : [],
-    loading : false ,
-    error : null
+  comments: [],
+  loading: false,
+  error: null
 };
 
-export default function commentsReducer (state = initialState, {type , payload}) {
+export default function commentReducer(
+  state = initialState,
+  { type, payload }
+) {
   switch (type) {
+    case GET_COMMENTS:
+      return {
+        ...state,
+        comments: [...state.comments, ...payload],
+        loading: false
+      };
+    case DELETE_COMMENT:
+      return {
+        ...state,
+        loading: false,
+        comments: state.comments.filter(elem => elem.id !== payload)
+      };
+    case COMMENTS_LOADING:
+      return { ...state, loading: true, error: null };
+    case ERROR_COMMENTS:
+      return { ...state, error: payload, loading: false };
 
-  case typeName:
-    return { ...state }
-
-  default:
-    return state
+    default:
+      return state;
   }
 }
