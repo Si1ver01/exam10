@@ -18,7 +18,7 @@ const CommentForm = ({ id }) => {
   };
 
   return (
-    <form onSubmit={submitHandler} className="px-2 mb-2">
+    <form onSubmit={submitHandler} className="px-2 mb-2 border-top pt-2">
       <div className="form-row">
         <div className="col">
           <input

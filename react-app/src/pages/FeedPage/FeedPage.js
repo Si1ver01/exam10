@@ -8,7 +8,6 @@ import { requestGetOneNews } from "../../store/actions/actionsNews";
 import Preloader from "../../components/Preloader/Preloader";
 
 const FeedPage = () => {
-  const [commentForm, setCommentForm] = useState(false);
   const dispatch = useDispatch();
   const oneNews = useSelector(state => state.news.oneNews);
   const loadingNews = useSelector(state => state.news.loading);
@@ -22,7 +21,6 @@ const FeedPage = () => {
     return <Preloader />;
   }
 
-
   return (
     <div className="container">
       <div className="row mt-2">
@@ -34,14 +32,8 @@ const FeedPage = () => {
                 {new Date(oneNews.date).toLocaleString()}
               </span>
               <p className="card-text">{oneNews.text}</p>
-              <button
-                className="btn btn-success d-flex align-items-center justify-content-center mt-3 btn-block text-center"
-                onClick={() => setCommentForm(!commentForm)}
-              >
-                Comment <FaCommentDots className="ml-2" />
-              </button>
             </div>
-            {commentForm && <CommentForm id={id} />}
+            <CommentForm id={id} />
             <div className="card-footer text-muted">
               <CommentList />
             </div>

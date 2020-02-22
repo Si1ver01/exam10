@@ -1,4 +1,5 @@
 import axios from "axios";
+import { setErrror } from "./actionsNews";
 
 export const GET_COMMENTS = "GET_COMMENTS";
 export const DELETE_COMMENT = "DELETE_COMMENT";
@@ -26,35 +27,25 @@ export const requestGetComment = id => async dispatch => {
     const { data } = response.data;
     dispatch(getComments(data));
   } catch (e) {
-    dispatch(errorComments(e.message));
+    dispatch(errorComments(e.response.data.error));
   }
 };
 
 export const requestAddComment = comment => async dispatch => {
   try {
-    // dispatch(commentsLoading());
-    // const response = await fetch("/comments", {
-    //   method: "POST",
-    //   body: JSON.stringify(comment),
-    //   headers: { "Content-Type": "application/json" }
-    // });
-    // const data = await response.json();
-
-    const response = await axios.post('/comments' , comment);
+    const response = await axios.post("/comments", comment);
     const data = response.data;
-    console.log(data);
-
     dispatch(addComment(data));
   } catch (e) {
-    dispatch(errorComments(e.message));
+    dispatch(setErrror(e.response.data.error));
   }
 };
 
 export const requestDeleteComment = id => async dispatch => {
   try {
-    await fetch(`/comments/${id}`, { method: "DELETE" });
+    await axios.delete(`/comments/${id}`);
     dispatch(deleteComment(id));
   } catch (e) {
-    dispatch(errorComments(e.message));
+    dispatch(setErrror(e.response.data.error));
   }
 };

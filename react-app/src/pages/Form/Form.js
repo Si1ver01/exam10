@@ -1,16 +1,19 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { requestAddNews } from "../../store/actions/actionsNews";
-
+import { clearError, requestAddNews } from "../../store/actions/actionsNews";
+import Modal from "../../components/Modal/Modal";
 const Form = () => {
   const [data, setData] = useState({
     title: "",
     text: "",
     image: null
   });
+  const [modal, setModal] = useState(false);
+
   const dispatch = useDispatch();
   const history = useHistory();
+  const error = useSelector(state => state.news.error);
 
   const inputHandler = e => {
     const { id, value } = e.target;
@@ -27,11 +30,17 @@ const Form = () => {
     const formData = new FormData();
     Object.keys(data).forEach(elem => formData.append(elem, data[elem]));
     await dispatch(requestAddNews(formData));
-    history.push("/");
+    setModal(true);
+  };
+
+  const modalHandler = () => {
+    setModal(false);
+    dispatch(clearError());
   };
 
   return (
     <div className="container">
+      {modal && <Modal error={error} handler={modalHandler} />}
       <div className="row mt-5">
         <div className="col-6 offset-3 border rounded">
           <h2 className="text-center mt-2">Create new news</h2>

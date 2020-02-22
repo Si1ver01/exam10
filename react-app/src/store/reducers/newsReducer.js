@@ -1,4 +1,5 @@
 import {
+  CLEAR_ERROR,
   DELETE_NEWS,
   GET_NEWS,
   GET_ONE_NEWS,
@@ -28,6 +29,8 @@ export default function newsReducer(state = initialState, { type, payload }) {
       };
     case SET_ERROR:
       return { ...state, loading: false, error: payload };
+    case CLEAR_ERROR:
+      return { ...state, error: null };
     default:
       return state;
   }

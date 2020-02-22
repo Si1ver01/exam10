@@ -8,7 +8,6 @@ const NewsFeed = () => {
   const dispatch = useDispatch();
   const news = useSelector(state => state.news.news);
   const loadingNews = useSelector(state => state.news.loading);
-  const error = useSelector(state => state.news.error);
 
   useEffect(() => {
     dispatch(requestGetNews());
