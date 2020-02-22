@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
 import { clearError, requestAddNews } from "../../store/actions/actionsNews";
 import Modal from "../../components/Modal/Modal";
 const Form = () => {
@@ -12,7 +11,6 @@ const Form = () => {
   const [modal, setModal] = useState(false);
 
   const dispatch = useDispatch();
-  const history = useHistory();
   const error = useSelector(state => state.news.error);
 
   const inputHandler = e => {

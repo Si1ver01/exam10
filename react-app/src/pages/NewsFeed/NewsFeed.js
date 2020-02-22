@@ -21,8 +21,6 @@ const NewsFeed = () => {
     );
   }
 
-  console.log("News feed");
-
   return (
     <div className="container">
       <h2 className="mt-2">News Feed</h2>

@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-import { FaTrash, FaPencilAlt, FaCommentDots } from "react-icons/fa";
+import React, { useEffect } from "react";
 import CommentList from "../../components/CommentList/CommentList";
 import CommentForm from "../../components/CommentForm/CommentForm";
 import { useParams } from "react-router-dom";
